@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Archivos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Lista de Archivos</h1>
+        <ul id="fileList" class="list-group mt-3"></ul>
+    </div>
+    <script>
+        async function fetchFiles() {
+            const response = await fetch('/listadodearchivos');
+            const files = await response.json();
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+            files.forEach(file => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.textContent = file;
+                fileList.appendChild(li);
+            });
+        }
+        fetchFiles();
+    </script>
+</body>
+</html>
